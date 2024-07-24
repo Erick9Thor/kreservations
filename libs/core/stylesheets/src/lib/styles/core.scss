@@ -1,5 +1,4 @@
 @use '@angular/material' as mat;
-//@use '@angular/material-experimental' as matx;
 
 @include mat.core();
 
@@ -7,29 +6,21 @@
 @import "../variables/var";
 
 // Mixins
-@import "../abstracts/mixins";
-
-// Fonts
-@import "../fonts/inter";
+// @import "../abstracts/mixins";
 
 // Themes
-@import "../themes/style-default";
+// @import "../themes/style-default";
 
 // Partials
-@import "../partials/horizontal";
-@import "../partials/misc";
-@import "../partials/print";
-@import "../partials/typography";
-@import "../partials/plugins/@angular/material/index";
-@import "../partials/plugins/quill/quill";
-
+// @import "../partials/horizontal";
+// @import "../partials/misc";
+// @import "../partials/print";
+// @import "../partials/typography";
+// @import "../partials/plugins/@angular/material/index";
+// @import "../partials/plugins/quill/quill";
 
 // Components
-@import "../components/snackbar";
-
-
-//@include matx.color-variants-back-compat($knowify-theme-light-m3);
-
+// @import "../components/snackbar";
 
 :root {
     @include mat.all-component-themes($knowify-theme-light);

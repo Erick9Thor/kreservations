@@ -22,7 +22,13 @@
             "input": "public"
           }
         ],
-        "styles": ["./src/styles.scss"],
+       "styles": [
+          "./src/styles.scss",
+          "libs/core/stylesheets/src/lib/tailwind.scss"
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/core/stylesheets/src/lib/styles/"]
+        },
         "scripts": []
       },
       "configurations": {
