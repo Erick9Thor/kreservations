@@ -1,0 +1,47 @@
+@use '@angular/material' as mat;
+@import '../variables/var';
+
+
+.knowify-style-dark {
+  @include mat.all-component-colors($knowify-theme-dark);
+
+  // Foreground
+  --background-app-bar: #{map-get(map-get($knowify-theme-dark, background), app-bar)};
+
+  // Background
+  --footer-background: var(--background-foreground);
+  --navigation-background: #{map-get(map-get($knowify-theme-dark, background), card)};
+  --toolbar-background: #{map-get(map-get($knowify-theme-dark, background), card)};
+  --background-base: #{map-get(map-get($knowify-theme-dark, background), background)};
+
+  // Colors
+  --background-foreground: #{map-get(map-get($knowify-theme-dark, background), card)};
+  --background-foreground-rgb: #{red(map-get(map-get($knowify-theme-dark, background), card))}, #{green(map-get(map-get($knowify-theme-dark, background), card))}, #{blue(map-get(map-get($knowify-theme-dark, background), card))};
+  --footer-color: var(--text-color);
+  --navigation-color: var(--text-color);
+  --text-color: #{$light-primary-text};
+  --toolbar-color: #{$light-primary-text};
+  --text-color-light: #{$dark-primary-text};
+
+   // Toolbar
+  --foreground-divider: #{map-get(map-get($knowify-theme-dark, foreground), divider)};
+  --text-hint: #{$light-disabled-text};
+
+  // // Navigation
+  --text-hint-light: #{$dark-disabled-text};
+  --background-hover: #{map-get(map-get($knowify-theme-dark, background), hover)};
+
+  // // Secondary Toolbar
+  --text-secondary: #{$light-secondary-text};
+
+  // // Footer
+  --text-secondary-light: #{$dark-secondary-text};
+  --secondary-toolbar-background: var(--background-foreground);
+
+  .mdc-text-field--disabled .mdc-text-field__input, .mat-mdc-select-disabled .mat-mdc-select-value{
+    color: #eeeeee;
+  }
+  .mdc-text-field--disabled .mdc-floating-label {
+    color: #bbbbbb;
+  }
+}

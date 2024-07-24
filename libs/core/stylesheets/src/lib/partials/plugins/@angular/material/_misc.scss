@@ -1,0 +1,115 @@
+.mat-mdc-icon-button .mat-button-wrapper > *,
+.mat-mdc-menu-item .mat-icon,
+.mat-mdc-button .mat-icon {
+  vertical-align: middle !important;
+}
+
+.mat-form-field-suffix, .mat-form-field-prefix {
+  .mat-mdc-icon-button .mat-icon {
+    font-size: inherit;
+  }
+}
+
+.mat-mdc-table {
+  mat-mdc-row,
+  mat-mdc-header-row,
+  mat-mdc-footer-row,
+  th.mat-mdc-header-cell,
+  td.mat-mdc-cell,
+  td.mat-mdc-footer-cell{
+    border-bottom-color: var(--foreground-divider);
+  }
+
+  .mdc-data-table__row:last-child .mdc-data-table__cell {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--foreground-divider);
+  }
+}
+
+.mat-form-field {
+  margin-bottom: 4px;
+}
+
+.mat-primary.mat-form-field {
+  .mat-form-field-prefix,
+  .mat-form-field-suffix {
+    transition: var(--trans-ease-out);
+  }
+
+  &.mat-focused .mat-form-field-prefix,
+  &.mat-focused .mat-form-field-suffix {
+    @apply text-primary;
+  }
+}
+
+.mat-form-field.mat-form-field-invalid {
+  &.mat-focused .mat-form-field-prefix,
+  &.mat-focused .mat-form-field-suffix {
+    @apply text-red;
+  }
+}
+
+.mat-mdc-table .mat-mdc-cell,
+.mat-mdc-table .mat-mdc-header-cell {
+  box-sizing: content-box;
+  padding-left: var(--padding-12);
+  padding-right: var(--padding-12);
+  white-space: nowrap;
+}
+
+.mat-paginator-page-size-select.mat-form-field .mat-form-field-flex {
+  padding-top: 0;
+}
+
+.mat-mdc-select-panel {
+  @apply text-base;
+}
+
+.mat-drawer-side {
+  border: 0;
+}
+
+textarea.mat-input-element {
+  @apply leading-normal;
+}
+
+.knowify-flex-form-field {
+  .mat-form-field-infix {
+    width: 50px;
+  }
+}
+
+.knowify-dense-form-field {
+  margin-bottom: -1.34375em;
+
+  &.mat-form-field-appearance-outline {
+    .mat-form-field-infix {
+      padding-top: 4px;
+    }
+  }
+}
+
+.knowify-tabs {
+  .mat-tab-label.mat-tab-label-active {
+    opacity: 1;
+  }
+
+  .mat-mdc-tab-link.mat-tab-label-active {
+    opacity: 1;
+  }
+}
+
+.knowify-tabs-dense {
+  .mat-tab-label {
+    min-width: 0;
+  }
+}
+
+.uppercase > * > .mat-sort-header-button {
+  text-transform: uppercase;
+}
+
+.mat-mdc-card-image {
+  max-width: none;
+}

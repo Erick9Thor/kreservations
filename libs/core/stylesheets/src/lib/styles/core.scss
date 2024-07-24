@@ -1,0 +1,65 @@
+@use '@angular/material' as mat;
+//@use '@angular/material-experimental' as matx;
+
+@include mat.core();
+
+// SCSS Vars
+@import "../variables/var";
+
+// Mixins
+@import "../abstracts/mixins";
+
+// Fonts
+@import "../fonts/inter";
+
+// Themes
+@import "../themes/style-default";
+
+// Partials
+@import "../partials/horizontal";
+@import "../partials/misc";
+@import "../partials/print";
+@import "../partials/typography";
+@import "../partials/plugins/@angular/material/index";
+@import "../partials/plugins/quill/quill";
+
+
+// Components
+@import "../components/snackbar";
+
+
+//@include matx.color-variants-back-compat($knowify-theme-light-m3);
+
+
+:root {
+    @include mat.all-component-themes($knowify-theme-light);
+}
+
+html {
+    font-family: "Exo 2", sans-serif;
+    font-size: 15px;
+    color: #828282;
+    height: 100%;
+    overflow: hidden;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "salt", "calt", "case";
+    @apply leading-normal antialiased;
+}
+
+body {
+    font-family: "Exo 2", sans-serif;
+    height: 100%;
+    letter-spacing: -0.75px;
+    display: flex;
+    flex-direction: column;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+hr {
+    @apply bg-gradient-to-r from-primary-500 via-primary to-primary-100;
+    height: 2px;
+    width: 100%;
+}
+  
