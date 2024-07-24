@@ -72,5 +72,6 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "kreservations"
+  "defaultProject": "kreservations",
+  "nxCloudAccessToken": "YzYxZDdmMjUtMGM2NS00MmIzLWJjYWItODdiYWY3ZTY4NTYzfHJlYWQtd3JpdGU="
 }
