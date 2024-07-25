@@ -1,0 +1,18 @@
+.page-container {
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+  
+.content {
+    background: var(--background-base);
+    position: relative;
+    width: 100%;
+  
+    min-height: calc(100% - var(--toolbar-height));
+    margin-top: var(--toolbar-height);
+}

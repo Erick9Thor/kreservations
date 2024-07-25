@@ -13,3 +13,12 @@ $knowify-theme-light:  mat.m2-define-light-theme((
     warn: $kafe-warn,
   )
 ));
+
+
+$light-primary-text: white;
+$light-secondary-text: rgba(white, 0.7);
+$light-disabled-text: rgba(white, 0.5);
+
+$dark-primary-text: rgba(black, 0.87);
+$dark-secondary-text: rgba(black, 0.54);
+$dark-disabled-text: rgba(black, 0.38);

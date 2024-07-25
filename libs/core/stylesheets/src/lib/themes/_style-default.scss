@@ -2,6 +2,7 @@
 
 // @formatter:off
 :root {
+  
   // Generic
   --padding-gutter: 1rem;
   --padding: 1.5rem;
@@ -23,21 +24,7 @@
   @screen lg {
     --padding-gutter: 1.5rem;
   }
-
-  // Typography
-  --font-weight-medium: 500;
-  --font-caption: #{mat.font-weight($rate-now-typography, caption) #{mat.font-size($rate-now-typography, caption)}/#{mat.line-height($rate-now-typography, caption)} mat.font-family($rate-now-typography, caption)};
-  --font-body-1: #{mat.font-weight($rate-now-typography, body-1) #{mat.font-size($rate-now-typography, body-1)}/#{mat.line-height($rate-now-typography, body-1)} mat.font-family($rate-now-typography, body-1)};
-  --font-body-2: #{mat.font-weight($rate-now-typography, body-2) #{mat.font-size($rate-now-typography, body-2)}/#{mat.line-height($rate-now-typography, body-2)} mat.font-family($rate-now-typography, body-2)};
-  --font-subtitle-2: #{mat.font-weight($rate-now-typography, subtitle-2) #{mat.font-size($rate-now-typography, subtitle-2)}/#{mat.line-height($rate-now-typography, subtitle-2)} mat.font-family($rate-now-typography, subtitle-2)};
-  --font-subtitle-1: #{mat.font-weight($rate-now-typography, subtitle-1) #{mat.font-size($rate-now-typography, subtitle-1)}/#{mat.line-height($rate-now-typography, subtitle-1)} mat.font-family($rate-now-typography, subtitle-1)};
-  --font-headline-5: #{mat.font-weight($rate-now-typography, headline-5) #{mat.font-size($rate-now-typography, headline-5)}/#{mat.line-height($rate-now-typography, headline-5)} mat.font-family($rate-now-typography, headline-5)};
-  --font-headline-6: #{mat.font-weight($rate-now-typography, headline-6) #{mat.font-size($rate-now-typography, headline-6)}/#{mat.line-height($rate-now-typography, headline-6)} mat.font-family($rate-now-typography, headline-6)};
-  --font-headline-4: #{mat.font-weight($rate-now-typography, headline-4) #{mat.font-size($rate-now-typography, headline-4)}/#{mat.line-height($rate-now-typography, headline-4)} mat.font-family($rate-now-typography, headline-4)};
-  --font-headline-3: #{mat.font-weight($rate-now-typography, headline-3) #{mat.font-size($rate-now-typography, headline-3)}/#{mat.line-height($rate-now-typography, headline-3)} mat.font-family($rate-now-typography, headline-3)};
-  --font-headline-2: #{mat.font-weight($rate-now-typography, headline-2) #{mat.font-size($rate-now-typography, headline-2)}/#{mat.line-height($rate-now-typography, headline-2)} mat.font-family($rate-now-typography, headline-2)};
-  --font-headline-1: #{mat.font-weight($rate-now-typography, headline-1) #{mat.font-size($rate-now-typography, headline-1)}/#{mat.line-height($rate-now-typography, headline-1)} mat.font-family($rate-now-typography, headline-1)};
-
+  
   // Transitions
   --trans-ease-in-out: all var(--trans-ease-in-out-duration) var(--trans-ease-in-out-timing-function);
   --trans-ease-in-out-duration: 500ms;
@@ -93,42 +80,8 @@
   --elevation-z19: #{knowify-elevation(19)};
   --elevation-z20: #{knowify-elevation(20)};
 
-  // // Sidenav
-  --sidenav-width: 280px;
-  --sidenav-collapsed-width: 72px;
-  --sidenav-background: #{$sidenav-background};
-  --sidenav-color: white;
 
-  --sidenav-toolbar-background: #{darken($sidenav-background, 1.5)};
-  --sidenav-toolbar-background-rgb: #{red(darken($sidenav-background, 1.5))}, #{green(darken($sidenav-background, 1.5))}, #{blue(darken($sidenav-background, 1.5))};
-  --sidenav-section-divider-color: #{map-get(map-get($knowify-theme-dark, foreground), divider)};
-
-  // // Sidenav Item
-  --sidenav-item-min-height: 48px;
-  --sidenav-item-padding-vertical: var(--padding-8);
-  --sidenav-item-padding-horizontal: var(--padding);
-  --sidenav-item-background-hover: #{darken($sidenav-background, 3)};
-  --sidenav-item-background-active: #{darken($sidenav-background, 3)};
-  --sidenav-item-font-weight: 500;
-  --sidenav-item-color: #A1A2B6;
-  --sidenav-item-color-hover: #{$light-primary-text};
-  --sidenav-item-color-active: #{$light-primary-text};
-  --sidenav-item-icon-color: #494B74;
-  --sidenav-item-icon-color-hover: rgb(var(--color-primary));
-  --sidenav-item-icon-color-active: rgb(var(--color-primary));
-  --sidenav-item-icon-gap: 16px;
-  --sidenav-item-icon-size: 24px;
-  --sidenav-item-dropdown-background: #{darken($sidenav-background, 3)};
-  --sidenav-item-dropdown-background-hover: #{darken($sidenav-background, 4)};
-  --sidenav-item-dropdown-color-hover: var(--sidenav-item-color-hover);
-  --sidenav-item-dropdown-background-active: var(--sidenav-item-dropdown-background-hover);
-  --sidenav-item-dropdown-color-active: var(--sidenav-item-color-active);
-  --sidenav-item-ripple-color: #{rgb(map-get(map-get($knowify-theme-light, foreground), base), 0.1)};
-
-  --sidenav-item-dropdown-gap: 12px;
-  --sidenav-subheading-color: #6b6e7f;
-
-  // // Toolbar
+  // Toolbar
   --toolbar-height: 66px;
   --toolbar-background: white;
   --toolbar-color: #{$dark-primary-text};

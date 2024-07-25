@@ -6,18 +6,17 @@
 @import "../variables/var";
 
 // Mixins
-// @import "../abstracts/mixins";
+@import "../abstracts/mixins";
 
 // Themes
-// @import "../themes/style-default";
+@import "../themes/style-default";
 
 // Partials
 // @import "../partials/horizontal";
 // @import "../partials/misc";
 // @import "../partials/print";
 // @import "../partials/typography";
-// @import "../partials/plugins/@angular/material/index";
-// @import "../partials/plugins/quill/quill";
+@import "../partials/plugins/@angular/material/index";
 
 // Components
 // @import "../components/snackbar";

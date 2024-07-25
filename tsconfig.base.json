@@ -15,6 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@kreservations/landing-pages": [
+        "libs/dashboard/landing-pages/src/index.ts"
+      ],
+      "@kreservations/layout": ["libs/core/layout/src/index.ts"],
       "@kreservations/stylesheets": ["libs/core/stylesheets/src/index.ts"]
     }
   },
