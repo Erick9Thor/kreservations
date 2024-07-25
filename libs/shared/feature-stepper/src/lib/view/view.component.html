@@ -1,0 +1,22 @@
+<div class="card">
+  <ng-container *ngIf="(steps$ | async)?.length > 0">
+    <mat-horizontal-stepper
+      [ngStyle]="{
+        padding: (steps$ | async)?.length <= 3 ? '0 20rem' : '0'
+      }"
+      #stepper
+      [labelPosition]="labelPosition"
+      [linear]="linear"
+      (selectionChange)="goToStepIndex($event.selectedIndex)"
+    >
+      <mat-step
+        *ngFor="let step of steps$ | async; let i = index"
+        [label]="step.data.title"
+        [stepControl]="step.data.stepController"
+      >
+      </mat-step>
+    </mat-horizontal-stepper>
+  </ng-container>
+
+  <ng-template #container></ng-template>
+</div>
