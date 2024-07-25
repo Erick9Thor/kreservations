@@ -9,9 +9,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ConfigReservationComponent } from './step-1-config-reservation/config-reservation.component';
 import { ReviewReservationComponent } from './step-2-review-reservation/review-reservation.component';
 import { ConfirmComponent } from './step-3-confirm/confirm.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
+    BrowserModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

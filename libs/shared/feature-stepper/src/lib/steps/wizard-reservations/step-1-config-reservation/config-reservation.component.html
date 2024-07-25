@@ -1,4 +1,4 @@
-<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+<div [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
   <!-- Campos del formulario para recoger la información necesaria -->
   <label>
     Nombre:
@@ -52,4 +52,4 @@
     <input formControlName="birthdayName" />
   </label>
   <button type="submit">Reservar</button>
-</form>
+</div>

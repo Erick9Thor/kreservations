@@ -29,7 +29,7 @@ export class ReviewReservationComponent {
     }
   }
 
-  editDetail(detail: string) {
+  editDetail() {
     this.router.navigate(['/reservation']);
   }
 }

@@ -39,7 +39,7 @@ export class StepperUserBuilderService {
     ],
   ]);
 
-  getWizardSteps(id: string): WizardStepperItem[] {
+  getWizardSteps(id: string): WizardStepperItem[] | undefined {
     return this.wizardsConfig.get(id);
   }
 }

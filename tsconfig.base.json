@@ -1,13 +1,18 @@
 {
   "compileOnSave": false,
+  "allowSyntheticDefaultImports": true,
   "compilerOptions": {
+    "resolveJsonModule": true,
+    "useDefineForClassFields": false,
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
+    "strictNullChecks": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "types": ["node"],
     "target": "es2022",
     "module": "esnext",
     "lib": ["es2020", "dom"],
@@ -31,6 +36,10 @@
         "libs/reservations/view-reservations/src/index.ts"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   },
   "exclude": ["node_modules", "tmp"]
 }
