@@ -10,11 +10,11 @@ import {
 import { AddStep, WizardStepperItem } from '@kreservations/models';
 import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs';
 import { StepperFacade } from '../store/stepper.facade';
-import { StepperUserBuilderService } from '../services/stepper.builder.service';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
+import { StepperUserBuilderService } from '../services/stepper.builder.service';
 
 @Component({
   selector: 'reservations-stepper',
@@ -49,7 +49,8 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
     private stepperFacade: StepperFacade,
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private stepperUserBuilderService: StepperUserBuilderService
   ) {}
 
   ngAfterViewInit() {
@@ -69,7 +70,7 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   }
 
   createStepProcess() {
-    this.stepperFacade.steps$
+    this.stepperFacade?.steps$
       .pipe(takeUntil(this.ngUnsubscribe$), take(1))
       .subscribe((steps: WizardStepperItem[]) => {
         if (steps && steps.length > 0) {
@@ -79,11 +80,16 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
             this.steps$.next(
               steps.map(
                 (stepItem: WizardStepperItem) =>
-                  new AddStep(stepItem.stepComponent, {
-                    ...stepItem,
-                    id: stepItem.id,
-                    stepController: new FormGroup([]),
-                  })
+                  new AddStep(
+                    this.stepperUserBuilderService.getStepComponent(
+                      stepItem.id
+                    ),
+                    {
+                      ...stepItem,
+                      id: stepItem.id,
+                      stepController: new FormGroup([]),
+                    }
+                  )
               )
             );
           }

@@ -7,7 +7,6 @@ export interface WizardStepperItem {
   isPast: boolean;
   isActive: boolean;
   stepController?: FormGroup | FormControl;
-  stepComponent: Type<any>;
 }
 
 export class AddStep {

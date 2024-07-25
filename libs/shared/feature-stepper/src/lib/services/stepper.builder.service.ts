@@ -19,27 +19,34 @@ export class StepperUserBuilderService {
           isActive: true,
           isPast: false,
           title: 'Config reservation',
-          stepComponent: ConfigReservationComponent,
         },
         {
           id: 'review-reservation',
           isActive: false,
           isPast: false,
           title: 'Review reservation',
-          stepComponent: ReviewReservationComponent,
         },
         {
           id: 'confirm',
           isActive: false,
           isPast: false,
           title: 'Confirm reservation',
-          stepComponent: ConfirmComponent,
         },
       ],
     ],
   ]);
 
+  stepsList = new Map<string, Type<any>>([
+    ['config-reservation', ConfigReservationComponent],
+    ['review-reservation', ReviewReservationComponent],
+    ['confirme', ConfirmComponent],
+  ]);
+
   getWizardSteps(id: string): WizardStepperItem[] | undefined {
     return this.wizardsConfig.get(id);
+  }
+
+  getStepComponent(id: string): Type<any> {
+    return this.stepsList.get(id);
   }
 }

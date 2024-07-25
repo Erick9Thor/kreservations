@@ -14,33 +14,20 @@ import {
   stepBack,
   updateData,
 } from './stepper.actions';
-import { Observable } from 'rxjs';
-import { WizardStepperItem } from '@kreservations/models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StepperFacade implements OnInit {
-  currentStep$: Observable<number>;
-  previousStep$: Observable<number>;
-  steps$: Observable<WizardStepperItem[]>;
-  getData$: Observable<Map<string, any>>;
+export class StepperFacade {
+  currentStep$ = this.store.select(fromStepperSelector.selectCurrentStep);
+  previousStep$ = this.store.select(fromStepperSelector.selectPreviousStep);
+  steps$ = this.store.select(fromStepperSelector.selectSteps);
+  getData$ = this.store.select(fromStepperSelector.selectStepData);
 
   constructor(
     private store: Store,
     private stepperUserBuilderService: StepperUserBuilderService
   ) {}
-
-  ngOnInit(): void {
-    this.currentStep$ = this.store.select(
-      fromStepperSelector.selectCurrentStep
-    );
-    this.previousStep$ = this.store.select(
-      fromStepperSelector.selectPreviousStep
-    );
-    this.steps$ = this.store.select(fromStepperSelector.selectSteps);
-    this.getData$ = this.store.select(fromStepperSelector.selectStepData);
-  }
 
   initStepper(id: string): void {
     this.store.dispatch(
