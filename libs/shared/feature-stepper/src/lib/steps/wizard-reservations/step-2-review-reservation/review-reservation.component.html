@@ -1,0 +1,19 @@
+<div *ngIf="reservationDetails">
+  <h2>Review Your Reservation</h2>
+  <p>Name: {{ reservationDetails.name }}</p>
+  <p>Email: {{ reservationDetails.email }}</p>
+  <p>Phone: {{ reservationDetails.phone }}</p>
+  <p>Date: {{ reservationDetails.date }}</p>
+  <p>Time: {{ reservationDetails.time }}</p>
+  <p>Party Size: {{ reservationDetails.partySize }}</p>
+  <p>Region: {{ reservationDetails.region }}</p>
+  <p>Children: {{ reservationDetails.children }}</p>
+  <p>Smoking: {{ reservationDetails.smoking }}</p>
+  <p>Birthday: {{ reservationDetails.birthday ? 'Yes' : 'No' }}</p>
+  <p *ngIf="reservationDetails.birthdayName">
+    Birthday Name: {{ reservationDetails.birthdayName }}
+  </p>
+
+  <button (click)="confirm()">Confirm</button>
+  <button (click)="editDetail()">Edit</button>
+</div>

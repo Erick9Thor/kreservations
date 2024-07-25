@@ -1,0 +1,55 @@
+<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+  <!-- Campos del formulario para recoger la información necesaria -->
+  <label>
+    Nombre:
+    <input formControlName="name" />
+  </label>
+  <label>
+    Email:
+    <input formControlName="email" type="email" />
+  </label>
+  <label>
+    Teléfono:
+    <input formControlName="phone" />
+  </label>
+  <label>
+    Fecha:
+    <input formControlName="date" type="date" />
+  </label>
+  <label>
+    Hora:
+    <select formControlName="time">
+      <!-- <option *ngFor="let time of times" [value]="time">{{ time }}</option> -->
+    </select>
+  </label>
+  <label>
+    Tamaño del grupo:
+    <input formControlName="partySize" type="number" />
+  </label>
+  <label>
+    Región:
+    <select formControlName="region">
+      <option value="Main Hall">Main Hall</option>
+      <option value="Bar">Bar</option>
+      <option value="Riverside">Riverside</option>
+      <option value="Riverside Smoking">Riverside (smoking allowed)</option>
+    </select>
+  </label>
+  <label>
+    Número de niños:
+    <input formControlName="children" type="number" />
+  </label>
+  <label>
+    Fumadores:
+    <input formControlName="smoking" type="checkbox" />
+  </label>
+  <label>
+    ¿Celebración de cumpleaños?:
+    <input formControlName="birthday" type="checkbox" />
+  </label>
+  <label *ngIf="reservationForm.get('birthday').value">
+    Nombre del cumpleañero:
+    <input formControlName="birthdayName" />
+  </label>
+  <button type="submit">Reservar</button>
+</form>
