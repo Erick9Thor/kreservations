@@ -9,7 +9,22 @@ const routes: Route[] = [
   {
     path: '',
     component: MainComponent,
-    children: [],
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('@kreservations/landing-pages').then(
+            (m) => m.LandingPagesModule
+          ),
+      },
+      {
+        path: 'reservations',
+        loadChildren: () =>
+          import('@kreservations/view-reservations').then(
+            (m) => m.ViewReservationsModule
+          ),
+      },
+    ],
   },
 ];
 

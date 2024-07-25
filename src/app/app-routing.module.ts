@@ -2,7 +2,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
-const routes: Route[] = [];
+const routes: Route[] = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('@kreservations/layout').then((m) => m.LayoutModule),
+  },
+];
 
 @NgModule({
   imports: [
