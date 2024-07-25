@@ -8,6 +8,11 @@ const routes: Route[] = [
     path: 'home',
     component: ViewHomeComponent,
   },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
