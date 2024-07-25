@@ -1,5 +1,5 @@
 import { Injectable, Type } from '@angular/core';
-import { WizardStepperItem } from '@kreservations/models';
+import { SteppersType, WizardStepperItem } from '@kreservations/models';
 import {
   ConfigReservationComponent,
   ConfirmComponent,
@@ -12,7 +12,7 @@ import {
 export class StepperUserBuilderService {
   wizardsConfig = new Map<string, WizardStepperItem[]>([
     [
-      'wizard-reservations',
+      SteppersType.WIZARD_RESERVATIONS,
       [
         {
           id: 'config-reservation',

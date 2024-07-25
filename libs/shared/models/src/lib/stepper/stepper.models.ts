@@ -16,3 +16,7 @@ export class AddStep {
 
   constructor(public component: Type<any>, public data: any) {}
 }
+
+export enum SteppersType {
+  WIZARD_RESERVATIONS = 'wizard-reservations',
+}

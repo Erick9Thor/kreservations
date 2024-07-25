@@ -17,7 +17,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 
 @Component({
-  selector: 'nx-ratenow-stepper',
+  selector: 'reservations-stepper',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss'],
   providers: [
