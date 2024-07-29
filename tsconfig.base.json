@@ -20,6 +20,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@kreservations/assets": ["libs/core/assets/src/index.ts"],
       "@kreservations/data-access": [
         "libs/reservations/data-access/src/index.ts"
       ],

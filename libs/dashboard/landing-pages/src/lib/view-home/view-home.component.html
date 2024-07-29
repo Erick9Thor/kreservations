@@ -1,12 +1,15 @@
-<div class="px-gutter flex w-full flex-col gap-4">
+<div
+  class="px-gutter flex w-full h-full flex-col gap-8 pt-4 overflow-auto text-black"
+>
   <!-- SECTION: LANDING IMAGE -->
 
-  <div></div>
-
+  <div class="flex min-h-[30rem] w-full">
+    <img class="w-full h-full object-cover" [src]="landscapeImg" />
+  </div>
   <!-- SECTION: TITLE -->
 
-  <div class="flex w-full items-center flex-col">
-    <h1>¡Bienvenido a Kafè!</h1>
+  <div class="flex w-full items-center flex-col gap-4">
+    <div class="text-6xl font-bold">¡Bienvenido a Kafè!</div>
     <span
       >Rserva tu mesa en nuestro aclamado restaurante en el Lower East Side de
       Manhattan</span
@@ -15,42 +18,61 @@
 
   <!-- SECTION: ABOUT US -->
 
-  <div class="flex w-full flex-col">
-    <div>Sobre Nosotros</div>
+  <div class="flex w-full flex-col gap-4">
+    <div class="text-3xl font-bold">Sobre Nosotros</div>
     <div>
       Kafe es reconocido por su ambiente acogedor y su deliciosa cocina. Dese su
       apertura, ha sido un lugar popular tanto para los locales como para los
       visitantes. Ven y disfruta de una experiencia gastroómica única
     </div>
 
-    <!-- IMAGE CARROSELL -->
+    <!-- IMAGES -->
 
-    <div class="flex"></div>
+    <div class="grid grid-cols-3 gap-4">
+      @for (item of listImgAboutUs; track $index) {
+      <img class="w-full object-cover h-[300px]" [src]="item" />
+      }
+    </div>
   </div>
 
   <!-- SECTION: RSERVATIONS -->
 
-  <div class="flex w-full flex-col">
-    <div>Reservations</div>
+  <div class="flex w-full flex-col gap-4">
+    <div class="text-3xl font-bold">Reservations</div>
     <div>Horario de reservas: 6pm a 10pm en intervalos de media hora.</div>
     <div>
       Para reservar, selecciona la fecha y hora deseada, proporciona tu
       información de contacto.
     </div>
+    <button class="flex-auto w-64" mat-flat-button color="primary">
+      Reservar ahora
+    </button>
   </div>
 
   <!-- SECTION: TESTIMONIOS -->
 
-  <div class="flex w-full flex-col">
-    <div>Testimonios</div>
-    <div class="flex w-full"></div>
+  <div class="flex w-full flex-col gap-4">
+    <div class="text-3xl font-bold">Testimonios</div>
+    <div class="grid grid-flow-row-dense grid-cols-3 gap-4">
+      @for (item of testimonies; track $index) {
+      <mat-card class="flex flex-col">
+        <mat-card-header>
+          <mat-card-subtitle>
+            {{ item.description }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-footer class="p-4">
+          {{ item.author }}
+        </mat-card-footer>
+      </mat-card>
+      }
+    </div>
   </div>
 
   <!-- SECTION: CONTACT -->
 
-  <div class="flex w-full flex-col">
-    <div>Información de Contacto</div>
-    <div></div>
-    <div class="flex w-full"></div>
+  <div class="flex w-full flex-col gap-4">
+    <div class="text-3xl font-bold">Información de Contacto</div>
+    <div class="w-full">Teléfono: (123) 456-7890</div>
   </div>
 </div>
