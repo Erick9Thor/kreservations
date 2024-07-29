@@ -1,17 +1,39 @@
 import { provideHttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
+import { LayoutModule, MainComponent } from '@kreservations/layout';
 
 const routes: Route[] = [
   {
     path: '',
-    loadChildren: () =>
-      import('@kreservations/layout').then((m) => m.LayoutModule),
+    component: MainComponent,
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('@kreservations/landing-pages').then(
+            (m) => m.LandingPagesModule
+          ),
+      },
+      {
+        path: 'reservations',
+        loadChildren: () =>
+          import('@kreservations/view-reservations').then(
+            (m) => m.ViewReservationsModule
+          ),
+      },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+    ],
   },
 ];
 
 @NgModule({
   imports: [
+    LayoutModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
