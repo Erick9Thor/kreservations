@@ -10,6 +10,10 @@ import { ConfigReservationComponent } from './step-1-config-reservation/config-r
 import { ReviewReservationComponent } from './step-2-review-reservation/review-reservation.component';
 import { ConfirmComponent } from './step-3-confirm/confirm.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { provideNativeDatetimeAdapter } from '@ng-matero/extensions/core';
 
 @NgModule({
   imports: [
@@ -22,6 +26,9 @@ import { BrowserModule } from '@angular/platform-browser';
     MatButtonModule,
     MatExpansionModule,
     MatDividerModule,
+    MtxDatetimepickerModule,
+    MatCheckboxModule,
+    MatSelectModule,
   ],
   declarations: [
     ConfigReservationComponent,

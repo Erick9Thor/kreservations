@@ -2,7 +2,7 @@
   <ng-container *ngIf="(steps$ | async)?.length > 0">
     <mat-horizontal-stepper
       [ngStyle]="{
-        padding: (steps$ | async)?.length <= 3 ? '0 20rem' : '0'
+        padding: (steps$ | async)?.length <= 3 ? '0 10rem' : '0'
       }"
       #stepper
       [labelPosition]="labelPosition"

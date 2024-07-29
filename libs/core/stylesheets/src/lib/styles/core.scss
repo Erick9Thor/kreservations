@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use '@ng-matero/extensions' as mtx;
 
 @include mat.core();
 
@@ -23,6 +24,7 @@
 
 :root {
     @include mat.all-component-themes($knowify-theme-light);
+    @include mtx.all-component-themes($knowify-theme-light);
 }
 
 html {
@@ -48,8 +50,8 @@ div {
 }
 
 hr {
-    @apply bg-gradient-to-r from-primary-500 via-primary to-primary-100;
-    height: 2px;
+    @apply bg-gradient-to-r from-primary-500 to-primary-200;
+    height: 2px !important;
     width: 100%;
 }
   

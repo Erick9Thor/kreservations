@@ -42,6 +42,6 @@ const routes: Route[] = [
     }),
   ],
   exports: [RouterModule],
-  providers: [provideHttpClient()], // add it here
+  providers: [provideHttpClient()],
 })
 export class AppRoutingModule {}
