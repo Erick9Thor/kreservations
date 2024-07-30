@@ -24,6 +24,7 @@
       "@kreservations/data-access": [
         "libs/reservations/data-access/src/index.ts"
       ],
+      "@kreservations/environment": ["libs/core/environment/src/index.ts"],
       "@kreservations/feature-stepper": [
         "libs/shared/feature-stepper/src/index.ts"
       ],
@@ -32,6 +33,9 @@
       ],
       "@kreservations/layout": ["libs/core/layout/src/index.ts"],
       "@kreservations/models": ["libs/shared/models/src/index.ts"],
+      "@kreservations/reservations-back/reservations": [
+        "libs/reservations-back/reservations/src/index.ts"
+      ],
       "@kreservations/stylesheets": ["libs/core/stylesheets/src/index.ts"],
       "@kreservations/view-reservations": [
         "libs/reservations/view-reservations/src/index.ts"

@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "reservations": {
+      "type": "library",
+      "root": "libs/reservations-back/reservations",
+      "entryFile": "index",
+      "sourceRoot": "libs/reservations-back/reservations/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/reservations-back/reservations/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": true
+  }
+}

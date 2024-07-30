@@ -35,6 +35,12 @@
       },
       "configurations": {
         "production": {
+          "fileReplacements": [
+            {
+              "replace": "libs/core/environment/src/lib/environment.ts",
+              "with": "libs/core/environment/src/lib/kreservations-back/environment.prod.ts"
+            }
+          ],
           "budgets": [
             {
               "type": "initial",
@@ -50,6 +56,12 @@
           "outputHashing": "all"
         },
         "development": {
+          "fileReplacements": [
+            {
+              "replace": "libs/core/environment/src/lib/environment.ts",
+              "with": "libs/core/environment/src/lib/kreservations-back/environment.prod.ts"
+            }
+          ],
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
