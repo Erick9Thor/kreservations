@@ -1,9 +1,9 @@
 {
   "name": "kreservations",
-  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "./src",
+  "sourceRoot": "apps/kreservations/src",
   "tags": [],
   "targets": {
     "build": {
@@ -11,13 +11,11 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/kreservations",
-        "index": "./src/index.html",
-        "main": "./src/main.ts",
+        "index": "apps/kreservations/src/index.html",
+        "main": "apps/kreservations/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "tsconfig.app.json",
-        "allowedCommonJsDependencies": [
-          "lodash"
-        ],
+        "tsConfig": "apps/kreservations/tsconfig.app.json",
+        "allowedCommonJsDependencies": ["lodash"],
         "inlineStyleLanguage": "scss",
         "assets": [
           {
@@ -26,8 +24,8 @@
             "output": "assets"
           }
         ],
-       "styles": [
-          "./src/styles.scss",
+        "styles": [
+          "apps/kreservations/src/styles.scss",
           "libs/core/stylesheets/src/lib/tailwind.scss"
         ],
         "stylePreprocessorOptions": {
@@ -52,7 +50,7 @@
           "outputHashing": "all"
         },
         "development": {
-         "optimization": false,
+          "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
         }
@@ -83,14 +81,14 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "options": {
-        "lintFilePatterns": ["./src"]
+        "lintFilePatterns": ["apps/kreservations/src"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectName}"],
       "options": {
-        "jestConfig": "jest.config.app.ts"
+        "jestConfig": "apps/kreservations/jest.config.app.ts"
       }
     },
     "serve-static": {

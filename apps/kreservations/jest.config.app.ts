@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
   displayName: 'kreservations',
-  preset: './jest.preset.js',
+  preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: './coverage/kreservations',
+  coverageDirectory: '../../coverage/kreservations',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
