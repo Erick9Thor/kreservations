@@ -1,0 +1,18 @@
+services:
+  backend-app:
+    container_name: backend-app
+    restart: always
+    ports:
+      - '8080:3000'
+    build:
+      dockerfile: ./apps/kreservations-back/Dockerfile
+
+  frontend-app:
+    container_name: frontend-app
+    restart: always
+    ports:
+      - '8090:80'
+    depends_on:
+      - backend-app
+    build:
+      dockerfile: ./apps/kreservations/Dockerfile

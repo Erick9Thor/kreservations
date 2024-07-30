@@ -3,5 +3,5 @@ export const environment = {
   runnerEnvironment: '%runnerEnvironment%',
   production: true,
   name: '-pro',
-  serverApi: 'http://localhost:3000/api',
+  serverApi: 'http://localhost:8080/api',
 };
