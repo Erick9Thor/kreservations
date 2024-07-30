@@ -1,19 +1,88 @@
-<div *ngIf="reservationDetails">
-  <h2>Review Your Reservation</h2>
-  <p>Name: {{ reservationDetails.name }}</p>
-  <p>Email: {{ reservationDetails.email }}</p>
-  <p>Phone: {{ reservationDetails.phone }}</p>
-  <p>Date: {{ reservationDetails.date }}</p>
-  <p>Time: {{ reservationDetails.time }}</p>
-  <p>Party Size: {{ reservationDetails.partySize }}</p>
-  <p>Region: {{ reservationDetails.region }}</p>
-  <p>Children: {{ reservationDetails.children }}</p>
-  <p>Smoking: {{ reservationDetails.smoking }}</p>
-  <p>Birthday: {{ reservationDetails.birthday ? 'Yes' : 'No' }}</p>
-  <p *ngIf="reservationDetails.birthdayName">
-    Birthday Name: {{ reservationDetails.birthdayName }}
-  </p>
+<div class="flex pt-10 flex-auto flex-col">
+  <div class="pt-0 p-8 flex flex-col w-full overflow-y-auto h-[53vh]">
+    <div
+      *ngIf="userInfoReservation$ | async as clientInfo"
+      class="grid auto-rows-max gap-8 p-8 pt-0"
+    >
+      <div class="grid grid-rows-1 gap-4">
+        <div class="text-xl font-bold">USER INFO</div>
 
-  <button (click)="confirm()">Confirm</button>
-  <button (click)="editDetail()">Edit</button>
+        <div class="grid grid-cols-2 gap-8">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Name:</div>
+            <div>{{ clientInfo.name }}</div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Email:</div>
+            <div>{{ clientInfo.email }}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Phone:</div>
+            <div>{{ clientInfo.phone }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-rows-1 gap-4">
+        <div class="text-xl font-bold">PARTY SIZE</div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Party size:</div>
+            <div>{{ clientInfo.partySize }}</div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Region Preference:</div>
+            <div>{{ clientInfo.sector }}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Number of childrens:</div>
+            <div>{{ clientInfo.childrens }}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Smokers:</div>
+            <div>{{ clientInfo.smokers }}</div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Birthdays:</div>
+            <div>{{ clientInfo.birthdays }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-rows-1 gap-4">
+        <div class="text-xl font-bold">DATE & TIME</div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Date:</div>
+            <div>{{ clientInfo.date }}</div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Hour:</div>
+            <div>{{ clientInfo.hour }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-end mt-2 w-full gap-2 p-5">
+    <button mat-raised-button color="primary" (click)="stepBack()">Edit</button>
+    <button mat-raised-button color="primary" (click)="finalize()">
+      Confirm
+    </button>
+  </div>
 </div>

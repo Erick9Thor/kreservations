@@ -7,13 +7,5 @@ import { ReservationService } from '@kreservations/data-access';
   styleUrl: './confirm.component.scss',
 })
 export class ConfirmComponent {
-  reservationDetails: any;
-
   constructor(private reservationService: ReservationService) {}
-
-  ngOnInit(): void {
-    this.reservationService.getReservationDetails().subscribe((details) => {
-      this.reservationDetails = details;
-    });
-  }
 }

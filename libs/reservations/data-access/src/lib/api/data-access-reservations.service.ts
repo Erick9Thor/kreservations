@@ -1,30 +1,53 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { StepperUserRservation } from '@kreservations/models';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
-  private reservationDetails = new BehaviorSubject<any>(null);
-
   constructor() {}
 
-  setReservationDetails(details: any) {
-    this.reservationDetails.next(details);
+  checkAvailability(
+    day: string
+  ): Observable<{ title: string; available: boolean }[]> {
+    return of([
+      {
+        title: '6:00 p.m.',
+        available: true,
+      },
+      {
+        title: '6:30 p.m.',
+        available: true,
+      },
+      {
+        title: '7:00 p.m.',
+        available: true,
+      },
+      {
+        title: '7:30 p.m.',
+        available: true,
+      },
+      {
+        title: '8:00 p.m.',
+        available: true,
+      },
+      {
+        title: '8:30 p.m.',
+        available: true,
+      },
+      {
+        title: '9:00 p.m.',
+        available: true,
+      },
+      {
+        title: '9:30 p.m.',
+        available: true,
+      },
+    ]);
   }
 
-  getReservationDetails() {
-    return this.reservationDetails.asObservable();
-  }
-
-  // Simulate backend check
-  checkAvailability(details: any): boolean {
-    // Implementar lógica para verificar la disponibilidad
-    return true;
-  }
-
-  confirmReservation(details: any): boolean {
-    // Implementar lógica para confirmar la reserva
-    return true;
+  confirmReservation(details: StepperUserRservation): Observable<boolean> {
+    return of(true);
   }
 }

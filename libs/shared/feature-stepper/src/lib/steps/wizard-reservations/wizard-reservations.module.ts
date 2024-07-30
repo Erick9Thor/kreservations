@@ -13,7 +13,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
-import { provideNativeDatetimeAdapter } from '@ng-matero/extensions/core';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   imports: [
@@ -29,6 +29,7 @@ import { provideNativeDatetimeAdapter } from '@ng-matero/extensions/core';
     MtxDatetimepickerModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatCardModule,
   ],
   declarations: [
     ConfigReservationComponent,

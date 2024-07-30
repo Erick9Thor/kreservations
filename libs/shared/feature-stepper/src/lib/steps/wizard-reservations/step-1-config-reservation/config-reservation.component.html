@@ -91,33 +91,45 @@
             </li>
           </ul>
 
-          <p>
-            Please note: You cannot make reservations where the number of
-            children is equal to the total group size. There must be at least
-            one adult in the group.
-          </p>
+          <div class="w-full flex flex-col gap-2">
+            <div class="font-bold">Please note:</div>
+
+            <div class="w-full">
+              You cannot make reservations where the number of children is equal
+              to the total group size. There must be at least one adult in the
+              group.
+            </div>
+            <div class="w-full">
+              The Riverside (smoking allowed) section prioritizes groups with
+              smokers. This area will only be available if you select that there
+              is a smoker in your group. If no one in your group smokes, please
+              choose one of our non-smoking sections.
+            </div>
+          </div>
         </div>
 
         <div class="grid grid-cols-2 gap-8">
           <mat-form-field>
             <mat-label>Tamaño del grupo:</mat-label>
-            <input matInput formControlName="partySize" />
+            <input
+              matInput
+              formControlName="partySize"
+              type="number"
+              min="1"
+              max="12"
+            />
             <mat-error
               *ngIf="this.reservationForm.get('partySize').hasError('required')"
             >
               Este campo es obligatorio
             </mat-error>
             <mat-error
-              *ngIf="
-                this.reservationForm.get('partySize').hasError('maxlength')
-              "
+              *ngIf="this.reservationForm.get('partySize').hasError('max')"
             >
               El tamaño del grupo no puede ser superior a 12
             </mat-error>
             <mat-error
-              *ngIf="
-                this.reservationForm.get('partySize').hasError('minlength')
-              "
+              *ngIf="this.reservationForm.get('partySize').hasError('min')"
             >
               El tamaño del grupo no puede ser inferior a 1
             </mat-error>
@@ -136,6 +148,14 @@
               *ngIf="this.reservationForm.get('sector').hasError('required')"
             >
             </mat-error>
+
+            @if (this.reservationForm.get('sector').invalid &&
+            this.reservationForm.get('sector').touched) {
+            <mat-error
+              *ngIf="this.reservationForm.get('sector').errors?.invalidSector"
+              >Selected sector does not match the criteria</mat-error
+            >
+            }
           </mat-form-field>
         </div>
 
@@ -169,7 +189,7 @@
         }
       </div>
 
-      <!-- <div class="grid grid-rows-1 gap-4">
+      <div class="grid grid-rows-1 gap-4">
         <div class="flex flex-col gap-3">
           <div class="text-xl font-bold">DATE & TIME</div>
           <hr />
@@ -178,24 +198,56 @@
         <div class="grid grid-cols-2 gap-8">
           <mat-form-field>
             <mat-label> Fecha y hora de la reserva </mat-label>
-            <mtx-datetimepicker #datetimePicker>
+            <mtx-datetimepicker #datetimePicker [type]="'date'">
               <mtx-datetimepicker-actions>
                 <button mat-button mtxDatetimepickerClear>Clear</button>
                 <button mat-button mtxDatetimepickerCancel>Cancel</button>
                 <button mat-raised-button mtxDatetimepickerApply>Apply</button>
               </mtx-datetimepicker-actions>
             </mtx-datetimepicker>
-            <input [mtxDatetimepicker]="datetimePicker" matInput required />
+            <input
+              [mtxDatetimepicker]="datetimePicker"
+              matInput
+              required
+              [min]="minDate"
+              [max]="maxDate"
+              formControlName="date"
+            />
             <mtx-datetimepicker-toggle
               [for]="datetimePicker"
               matSuffix
             ></mtx-datetimepicker-toggle>
           </mat-form-field>
         </div>
-      </div> -->
+
+        @if (this.reservationForm.get('date').value) {
+        <div class="grid grid-flow-row-dense grid-cols-5 gap-4">
+          @for (hour of availableHours; track $index; ; let i = $index) {
+          <mat-card
+            class="flex flex-col cursor-pointer hover:bg-primary-50"
+            appearance="outlined"
+            (click)="selectHour(hour); selectedDateIndex = i"
+            [ngClass]="{
+              'border-primary-500 border-2 bg-primary-100':
+                i === selectedDateIndex
+            }"
+          >
+            <mat-card-content> {{ hour.title }}</mat-card-content>
+          </mat-card>
+          }
+        </div>
+        }
+      </div>
     </div>
   </div>
   <div class="flex justify-end w-full gap-2 p-5">
-    <button mat-raised-button color="primary">Siguiente</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveData()"
+      [disabled]="!reservationForm?.valid"
+    >
+      Next
+    </button>
   </div>
 </div>
