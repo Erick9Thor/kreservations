@@ -31,13 +31,8 @@ export class ReservationService {
     );
   }
 
-  findAvailableTables(
-    date: string,
-    hour: string,
-    partySize: number,
-    sector: string
-  ) {
-    return from(this.getAvailableTables(date, hour, partySize, sector)).pipe(
+  findAvailableTables(date: string, partySize: number, sector: string) {
+    return from(this.getAvailableTables(date, partySize, sector)).pipe(
       map((tables) => {
         return tables;
       }),
@@ -52,17 +47,66 @@ export class ReservationService {
     return of(true);
   }
 
-  private getAvailableTables(
-    date: string,
-    hour: string,
-    partySize: number,
-    sector: string
-  ) {
+  private getAvailableTables(date: string, partySize: number, sector: string) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve([
-          { id: 1, sector, seatingCapacity: partySize, available: true },
-          { id: 2, sector, seatingCapacity: partySize, available: true },
+          {
+            id: 1,
+            sector,
+            seatingCapacity: partySize,
+            available: true,
+            title: '6:00 p.m',
+          },
+          {
+            id: 2,
+            sector,
+            seatingCapacity: partySize,
+            available: true,
+            title: '6:30 p.m.',
+          },
+          {
+            id: 3,
+            sector,
+            seatingCapacity: partySize,
+            available: true,
+            title: '7:00 p.m.',
+          },
+          {
+            id: 4,
+            sector,
+            seatingCapacity: partySize,
+            available: true,
+            title: '7:30 p.m.',
+          },
+          {
+            id: 5,
+            sector,
+            seatingCapacity: partySize,
+            available: true,
+            title: '8:00 p.m.',
+          },
+          {
+            id: 6,
+            sector,
+            seatingCapacity: partySize,
+            available: true,
+            title: '8:30 p.m.',
+          },
+          {
+            id: 7,
+            sector,
+            seatingCapacity: partySize,
+            available: true,
+            title: '9:30 p.m.',
+          },
+          {
+            id: 8,
+            sector,
+            seatingCapacity: partySize,
+            available: true,
+            title: '9:30 p.m.',
+          },
         ]);
       }, 1000);
     });

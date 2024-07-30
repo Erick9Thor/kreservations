@@ -121,7 +121,11 @@ export class ConfigReservationComponent
       .subscribe({
         next: (date) => {
           this.reservationService
-            .checkAvailability(date)
+            .checkAvailability(
+              date,
+              this.reservationForm.get('partySize').value,
+              this.reservationForm.get('sector').value
+            )
             .pipe(take(1))
             .subscribe({
               next: (response) => (this.availableHours = response),

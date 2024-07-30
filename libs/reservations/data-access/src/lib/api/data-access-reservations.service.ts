@@ -1,53 +1,32 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@kreservations/environment';
 import { StepperUserRservation } from '@kreservations/models';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   checkAvailability(
-    day: string
+    date: string,
+    partySize: number,
+    sector: string
   ): Observable<{ title: string; available: boolean }[]> {
-    return of([
-      {
-        title: '6:00 p.m.',
-        available: true,
-      },
-      {
-        title: '6:30 p.m.',
-        available: true,
-      },
-      {
-        title: '7:00 p.m.',
-        available: true,
-      },
-      {
-        title: '7:30 p.m.',
-        available: true,
-      },
-      {
-        title: '8:00 p.m.',
-        available: true,
-      },
-      {
-        title: '8:30 p.m.',
-        available: true,
-      },
-      {
-        title: '9:00 p.m.',
-        available: true,
-      },
-      {
-        title: '9:30 p.m.',
-        available: true,
-      },
-    ]);
+    const params = new HttpParams()
+      .set('date', date)
+      .set('partySize', partySize.toString())
+      .set('sector', sector);
+
+    return this.http.get<{ title: string; available: boolean }[]>(
+      `${environment.serverApi}/reservations/available-tables`,
+      { params }
+    );
   }
 
-  confirmReservation(details: StepperUserRservation): Observable<boolean> {
-    return of(true);
+  createRservation(details: StepperUserRservation): Observable<object> {
+    return this.http.post(`${environment.serverApi}/reservations`, details);
   }
 }
