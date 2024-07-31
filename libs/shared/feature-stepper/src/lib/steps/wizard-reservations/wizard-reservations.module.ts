@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MatCardModule } from '@angular/material/card';
+import { DirectivesModule } from '@kreservations/directives';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
     MatCheckboxModule,
     MatSelectModule,
     MatCardModule,
+    DirectivesModule,
   ],
   declarations: [
     ConfigReservationComponent,

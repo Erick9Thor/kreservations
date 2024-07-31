@@ -81,7 +81,12 @@
   </div>
   <div class="flex justify-end mt-2 w-full gap-2 p-5">
     <button mat-raised-button color="primary" (click)="stepBack()">Edit</button>
-    <button mat-raised-button color="primary" (click)="finalize()">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="finalize()"
+      [mtBasicSpinner]="loggingSended"
+    >
       Confirm
     </button>
   </div>

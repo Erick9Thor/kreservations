@@ -17,6 +17,8 @@ export class ReviewReservationComponent extends BaseComponent {
   userInfoReservation$: BehaviorSubject<StepperUserRservation> =
     new BehaviorSubject<StepperUserRservation>(null);
 
+  loggingSended = false;
+
   constructor(
     private stepperFacade: StepperFacade,
     private reservationService: ReservationService
@@ -41,12 +43,17 @@ export class ReviewReservationComponent extends BaseComponent {
   }
 
   finalize() {
+    this.loggingSended = true;
+
     this.reservationService
       .createRservation(this.userInfoReservation$.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (responese) => {
-          console.log(responese);
+        next: () => {
+          this.nextStep.emit();
+        },
+        error: () => {
+          this.loggingSended = false;
         },
       });
   }

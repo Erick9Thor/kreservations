@@ -24,6 +24,7 @@
       "@kreservations/data-access": [
         "libs/reservations/data-access/src/index.ts"
       ],
+      "@kreservations/directives": ["libs/shared/directives/src/index.ts"],
       "@kreservations/environment": ["libs/core/environment/src/index.ts"],
       "@kreservations/feature-stepper": [
         "libs/shared/feature-stepper/src/index.ts"
