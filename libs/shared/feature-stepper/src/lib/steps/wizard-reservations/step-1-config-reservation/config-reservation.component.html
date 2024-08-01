@@ -189,6 +189,8 @@
         }
       </div>
 
+      @if(reservationForm.get('partySize').value > 0 &&
+      reservationForm.get('sector').value) {
       <div class="grid grid-rows-1 gap-4">
         <div class="flex flex-col gap-3">
           <div class="text-xl font-bold">DATE & TIME</div>
@@ -224,12 +226,14 @@
         <div class="grid grid-flow-row-dense grid-cols-5 gap-4">
           @for (hour of availableHours; track $index; ; let i = $index) {
           <mat-card
-            class="flex flex-col cursor-pointer hover:bg-primary-50"
+            class="flex flex-col"
             appearance="outlined"
-            (click)="selectHour(hour); selectedDateIndex = i"
+            (click)="hour.available ? selectHour(hour, i) : null"
             [ngClass]="{
               'border-primary-500 border-2 bg-primary-100':
-                i === selectedDateIndex
+                i === selectedHourIndex,
+              'cursor-pointer hover:bg-primary-50': hour.available,
+              'opacity-50': !hour.available
             }"
           >
             <mat-card-content> {{ hour.title }}</mat-card-content>
@@ -238,6 +242,7 @@
         </div>
         }
       </div>
+      }
     </div>
   </div>
   <div class="flex justify-end w-full gap-2 p-5">

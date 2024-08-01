@@ -11,6 +11,14 @@ export class CreateReservationDto {
   birthdays: boolean;
   birthDayName?: string;
 
-  date: string;
+  date: number;
   hour: string;
+}
+
+export class AvailableHourDTO {
+  id: number;
+  sector: string;
+  seatingCapacity: number;
+  available: boolean;
+  title: string;
 }

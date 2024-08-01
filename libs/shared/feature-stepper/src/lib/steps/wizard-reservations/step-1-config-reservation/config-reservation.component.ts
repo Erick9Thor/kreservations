@@ -9,9 +9,17 @@ import {
   Validators,
 } from '@angular/forms';
 import { ReservationService } from '@kreservations/data-access';
-import { BaseComponent, WizardStepperItem } from '@kreservations/models';
+import {
+  BaseComponent,
+  UserReservation,
+  WizardStepperItem,
+} from '@kreservations/models';
 import { merge, take, takeUntil } from 'rxjs';
 import { StepperFacade } from '../../../store/stepper.facade';
+import {
+  AvailableHourDTO,
+  CreateReservationDto,
+} from '@kreservations/reservations-back/reservations';
 
 @Component({
   selector: 'lib-config-reservation',
@@ -33,9 +41,11 @@ export class ConfigReservationComponent
     return this._data;
   }
 
-  _data: WizardStepperItem;
+  private _data: WizardStepperItem;
 
   reservationForm: FormGroup;
+
+  // THIS SHOULD BE AN ENDPOINT, WITH INFO AND CAPACITY ETC...
   sectors: { title: string; available: boolean }[] = [
     {
       title: 'Main Hall',
@@ -61,9 +71,10 @@ export class ConfigReservationComponent
   minDate = new Date('2024-07-24'); // YYYY-MM-DDTHH:mm:ss.sssZ
   maxDate = new Date('2024-07-31');
 
-  availableHours: { title: string; available: boolean }[];
+  availableHours: AvailableHourDTO[];
 
-  selectedDateIndex = null;
+  selectedHourIndex = null;
+  previuousData: UserReservation = null;
 
   constructor(
     private fb: FormBuilder,
@@ -76,73 +87,12 @@ export class ConfigReservationComponent
   ngOnInit(): void {
     this.initForm();
     this.fetchData();
+    this.loadInitialData();
   }
 
-  fetchData() {
-    merge(
-      this.reservationForm.get('partySize').valueChanges,
-      this.reservationForm.get('smokers').valueChanges,
-      this.reservationForm.get('childrens').valueChanges
-    )
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          if (this.reservationForm.get('sector').disabled) {
-            this.reservationForm.get('sector').enable();
-          }
-
-          this.updateAvailability();
-
-          this.reservationForm.get('sector').updateValueAndValidity();
-        },
-      });
-
-    this.reservationForm
-      .get('birthdays')
-      .valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (value) => {
-          if (value) {
-            this.reservationForm.addControl(
-              'birthDayName',
-              new FormControl('', Validators.required)
-            );
-          } else {
-            this.reservationForm.removeControl('birthDayName');
-          }
-
-          this.isBirthDay = value;
-        },
-      });
-
-    this.reservationForm
-      .get('date')
-      .valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (date) => {
-          this.reservationService
-            .checkAvailability(
-              date,
-              this.reservationForm.get('partySize').value,
-              this.reservationForm.get('sector').value
-            )
-            .pipe(take(1))
-            .subscribe({
-              next: (response) => (this.availableHours = response),
-            });
-        },
-      });
-
-    this.stepperFacade.getData$.pipe(take(1)).subscribe((data) => {
-      if (data.get(this.data.id)) {
-        this.reservationForm.patchValue(data.get(this.data.id));
-
-        // TODO
-        this.selectedDateIndex = 0;
-      }
-    });
-  }
-
+  /**
+   * Initializes the reservation form with validators.
+   */
   initForm() {
     this.reservationForm = this.fb.group({
       name: new FormControl('', [
@@ -183,95 +133,222 @@ export class ConfigReservationComponent
     this.reservationForm.get('sector').disable();
   }
 
-  updateAvailability() {
-    this.sectors = this.sectors.map((sector) => {
-      let available = false;
-      switch (sector.title) {
-        case 'Main Hall':
-          available =
-            this.reservationForm.get('partySize').value <= 12 &&
-            !this.reservationForm.get('smokers').value;
-          break;
-        case 'Bar':
-          available =
-            this.reservationForm.get('partySize').value <= 4 &&
-            this.reservationForm.get('childrens').value === 0 &&
-            !this.reservationForm.get('smokers').value;
-          break;
-        case 'Riverside':
-          available =
-            this.reservationForm.get('partySize').value <= 8 &&
-            !this.reservationForm.get('smokers').value;
-          break;
-        case 'Riverside (smoking allowed)':
-          available =
-            this.reservationForm.get('partySize').value <= 6 &&
-            this.reservationForm.get('childrens').value === 0 &&
-            this.reservationForm.get('smokers').value;
-          break;
+  /**
+   * Subscribes to form value changes and updates availability accordingly.
+   */
+  fetchData(): void {
+    merge(
+      this.reservationForm.get('partySize').valueChanges,
+      this.reservationForm.get('smokers').valueChanges,
+      this.reservationForm.get('childrens').valueChanges
+    )
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          if (this.reservationForm.get('sector').disabled) {
+            this.reservationForm.get('sector').enable();
+          }
+
+          this.updateAvailability();
+
+          this.reservationForm.get('sector').updateValueAndValidity();
+        },
+      });
+
+    this.reservationForm
+      .get('birthdays')
+      .valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (value) => {
+          this.handleBirthdayChange(value);
+        },
+      });
+
+    this.reservationForm
+      .get('date')
+      .valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe((date) => this.checkAvailability(date));
+  }
+
+  /**
+   * Loads initial data into the form.
+   */
+  private loadInitialData(): void {
+    this.stepperFacade.getData$.pipe(take(1)).subscribe((data) => {
+      if (data.get(this.data.id)) {
+        this.previuousData = data.get(this.data.id);
+
+        this.reservationForm.patchValue(this.previuousData);
       }
-      return { ...sector, available };
     });
   }
 
-  selectHour(hour: { title: string; available: boolean }) {
+  /**
+   * Handles changes to the birthday checkbox.
+   * @param value - The new value of the birthday checkbox.
+   */
+  private handleBirthdayChange(value: any): void {
+    if (value) {
+      this.reservationForm.addControl(
+        'birthDayName',
+        new FormControl('', Validators.required)
+      );
+    } else {
+      this.reservationForm.removeControl('birthDayName');
+    }
+
+    this.isBirthDay = value;
+  }
+
+  /**
+   * Checks availability of reservation based on selected date.
+   * @param date - The selected date.
+   */
+  private checkAvailability(date: string): void {
+    const timestamp = new Date(date).getTime();
+    const partySize = this.reservationForm.get('partySize').value;
+    const sector = this.reservationForm.get('sector').value;
+
+    this.reservationService
+      .checkAvailability(timestamp, partySize, sector)
+      .pipe(take(1))
+      .subscribe((response) => {
+        this.availableHours = response;
+        if (this.previuousData && this.previuousData.hour) {
+          this.selectedHourIndex = this.availableHours.findIndex(
+            (val) => val.title === this.previuousData.hour
+          );
+        }
+      });
+  }
+
+  /**
+   * Updates the availability of sectors based on form values.
+   */
+  private updateAvailability(): void {
+    this.sectors = this.sectors.map((sector) => ({
+      ...sector,
+      available: this.isSectorAvailable(sector.title),
+    }));
+  }
+
+  /**
+   * Checks if a sector is available based on form values.
+   * @param sector - The sector title.
+   * @returns boolean - Availability of the sector.
+   */
+  private isSectorAvailable(sector: string): boolean {
+    const partySize = this.reservationForm.get('partySize').value;
+    const smokers = this.reservationForm.get('smokers').value;
+    const childrens = this.reservationForm.get('childrens').value;
+
+    switch (sector) {
+      case 'Main Hall':
+        return partySize <= 12 && !smokers;
+      case 'Bar':
+        return partySize <= 4 && childrens === 0 && !smokers;
+      case 'Riverside':
+        return partySize <= 8 && !smokers;
+      case 'Riverside (smoking allowed)':
+        return partySize <= 6 && childrens === 0 && smokers;
+      default:
+        return false;
+    }
+  }
+
+  /**
+   * Selects an available hour for reservation.
+   * @param hour - The selected hour.
+   * @param index - The index of the selected hour.
+   */
+  selectHour(hour: AvailableHourDTO, index: number): void {
+    this.selectedHourIndex = index;
     if (hour && hour.available) {
       this.reservationForm.get('hour').setValue(hour.title);
     }
   }
 
-  saveData() {
-    this.stepperFacade.setStepData(this.data.id, this.reservationForm.value);
+  /**
+   * Saves the current reservation data and emits the next step event.
+   */
+  saveData(): void {
+    const reservation: CreateReservationDto = {
+      ...this.reservationForm.value,
+      date: new Date(this.reservationForm.value.date).getTime(),
+    };
+
+    this.stepperFacade.setStepData(this.data.id, reservation);
     this.nextStep.emit();
   }
 
   // CUSTOM VALIDATORS
 
-  childrenLessThanGroupSizeValidator(): ValidatorFn {
+  /**
+   * Validator to ensure children count is less than the party size.
+   * @returns ValidatorFn
+   */
+  private childrenLessThanGroupSizeValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const grupSize = control.get('partySize')?.value;
+      const groupSize = control.get('partySize')?.value;
       const numChildren = control.get('childrens')?.value;
 
       return numChildren !== null &&
-        grupSize !== null &&
-        numChildren >= grupSize
+        groupSize !== null &&
+        numChildren >= groupSize
         ? { childrenGreaterThanOrEqualGroupSize: true }
         : null;
     };
   }
 
-  sectorValidator(): ValidatorFn {
+  /**
+   * Validator to ensure the selected sector is valid based on form values.
+   * @returns ValidatorFn
+   */
+  private sectorValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const form = control.parent;
-      if (!form) {
-        return null;
-      }
+      if (!form) return null;
 
-      const grupSize = form.get('partySize').value;
+      const groupSize = form.get('partySize').value;
       const smoke = form.get('smokers').value;
       const selectedSector = control.value;
 
-      let isValid = false;
-
-      switch (selectedSector) {
-        case 'Main Hall':
-          isValid = grupSize <= 12 && !smoke;
-          break;
-        case 'Bar':
-          isValid =
-            grupSize <= 4 && form.get('childrens').value === 0 && !smoke;
-          break;
-        case 'Riverside':
-          isValid = grupSize <= 8 && !smoke;
-          break;
-        case 'Riverside (smoking allowed)':
-          isValid = grupSize <= 6 && form.get('childrens').value === 0 && smoke;
-          break;
-        default:
-          isValid = true;
-      }
+      const isValid = this.isSectorAvailableBasedOnValues(
+        selectedSector,
+        groupSize,
+        smoke,
+        form.get('childrens').value
+      );
 
       return isValid ? null : { invalidSector: true };
     };
+  }
+
+  /**
+   * Checks if a sector is valid based on provided values.
+   * @param sector - The sector title.
+   * @param groupSize - The size of the party.
+   * @param smoke - Whether the group includes smokers.
+   * @param childrens - The number of children in the group.
+   * @returns boolean - Validity of the sector.
+   */
+  private isSectorAvailableBasedOnValues(
+    sector: string,
+    groupSize: number,
+    smoke: boolean,
+    childrens: number
+  ): boolean {
+    switch (sector) {
+      case 'Main Hall':
+        return groupSize <= 12 && !smoke;
+      case 'Bar':
+        return groupSize <= 4 && childrens === 0 && !smoke;
+      case 'Riverside':
+        return groupSize <= 8 && !smoke;
+      case 'Riverside (smoking allowed)':
+        return groupSize <= 6 && childrens === 0 && smoke;
+      default:
+        return true;
+    }
   }
 }

@@ -49,17 +49,26 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-2 gap-8">
           <div class="flex flex-col gap-2">
             <div class="font-bold">Smokers:</div>
-            <div>{{ clientInfo.smokers }}</div>
+            <div>{{ clientInfo.smokers ? 'Yes' : 'No' }}</div>
           </div>
 
           <div class="flex flex-col gap-2">
             <div class="font-bold">Birthdays:</div>
-            <div>{{ clientInfo.birthdays }}</div>
+            <div>{{ clientInfo.birthdays ? 'Yes' : 'No' }}</div>
           </div>
         </div>
+
+        @if(clientInfo.birthdays) {
+        <div class="grid grid-cols-2 gap-2">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold">Birtday Name:</div>
+            <div>{{ clientInfo.birthDayName }}</div>
+          </div>
+        </div>
+        }
       </div>
 
       <div class="grid grid-rows-1 gap-4">
@@ -68,7 +77,7 @@
         <div class="grid grid-cols-2 gap-8">
           <div class="flex flex-col gap-2">
             <div class="font-bold">Date:</div>
-            <div>{{ clientInfo.date }}</div>
+            <div>{{ clientInfo.date | date : 'MMM dd, yyyy' }}</div>
           </div>
 
           <div class="flex flex-col gap-2">

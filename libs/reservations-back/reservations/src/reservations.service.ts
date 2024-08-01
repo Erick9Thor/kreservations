@@ -6,7 +6,7 @@ import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { Reservation } from './entities/reservation.entity';
 
-export type Sector =
+export type SectorType =
   | 'Main Hall'
   | 'Bar'
   | 'Riverside'
@@ -14,7 +14,7 @@ export type Sector =
 
 @Injectable()
 export class ReservationService {
-  private readonly sectorConstraints: Record<Sector, number> = {
+  private readonly sectorConstraints: Record<SectorType, number> = {
     'Main Hall': 12,
     Bar: 4,
     Riverside: 8,
@@ -44,11 +44,9 @@ export class ReservationService {
     );
   }
 
-  findAvailableTables(date: string, partySize: number, sector: Sector) {
+  findAvailableTables(date: number, partySize: number, sector: SectorType) {
     return from(this.getAvailableTables(date, partySize, sector)).pipe(
-      map((tables) => {
-        return tables;
-      }),
+      map((tables) => tables),
       catchError((error) => {
         console.error('Error finding available tables:', error);
         return throwError(() => new Error('Failed to find available tables'));
@@ -57,52 +55,29 @@ export class ReservationService {
   }
 
   validateReservation(createReservationDto: CreateReservationDto) {
-    const { date, hour, partySize, sector } = createReservationDto;
-
-    // Check if the sector is valid
-    const maxSize = this.sectorConstraints[sector as Sector];
-    if (!maxSize) {
-      return of(false);
-    }
-
-    // Check if party size is acceptable for the sector
-    if (partySize > maxSize) {
-      return of(false);
-    }
-
-    // Check if the date and hour are valid
-    const reservationDate = new Date(date);
-    const currentDate = new Date();
-    const isDateValid = reservationDate >= currentDate;
-    if (!isDateValid) {
-      return of(false);
-    }
-
-    // MORE VALIDATIONS
-
+    //  VALIDATIONS
     return of(true);
   }
 
   private async getAvailableTables(
-    date: string,
+    date: number,
     partySize: number,
-    sector: Sector
+    sector: SectorType
   ): Promise<any[]> {
-    const maxSize = this.sectorConstraints[sector as Sector];
+    const maxSize = this.sectorConstraints[sector];
     if (!maxSize) {
       throw new Error('Invalid sector');
     }
 
-    // Find reservations that overlap with the requested time and sector
     const reservations = await this.reservationRepository.find({
       where: {
         date,
         sector,
-        partySize: partySize <= maxSize ? partySize : maxSize, // Ensure the party size fits within the sector's constraints
+        partySize: partySize <= maxSize ? partySize : maxSize,
       },
     });
 
-    // For simplicity, this example assumes that tables are always available.
+    // SImplificated version
     const availableTables = [
       {
         id: 1,
@@ -161,6 +136,15 @@ export class ReservationService {
         title: '9:30 p.m.',
       },
     ];
+
+    if (reservations.length > 0) {
+      const notAvailableHours = reservations.map((val) => val.hour);
+      availableTables.forEach((table) => {
+        if (notAvailableHours.includes(table.title)) {
+          table.available = false;
+        }
+      });
+    }
 
     return availableTables.filter(
       (table) => table.seatingCapacity >= partySize

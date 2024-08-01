@@ -26,13 +26,15 @@ export class ConfirmComponent extends BaseComponent implements OnInit {
 
   fetchData() {
     this.stepperFacade.getData$.pipe(take(1)).subscribe((data) => {
-      const reservationId = data.get('review-reservation');
+      const reservationId = data.get('review-reservation').id;
 
       this.reservationService
         .getReservationById(reservationId)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: (value: UserReservation) => {},
+          next: (value: UserReservation) => {
+            this.userInfoReservation$.next(value);
+          },
         });
     });
   }

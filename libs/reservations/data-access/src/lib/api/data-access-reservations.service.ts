@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@kreservations/environment';
 import { UserReservation } from '@kreservations/models';
+import { AvailableHourDTO } from '@kreservations/reservations-back/reservations';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,16 +12,16 @@ export class ReservationService {
   constructor(private http: HttpClient) {}
 
   checkAvailability(
-    date: string,
+    date: number,
     partySize: number,
     sector: string
-  ): Observable<{ title: string; available: boolean }[]> {
+  ): Observable<AvailableHourDTO[]> {
     const params = new HttpParams()
       .set('date', date)
       .set('partySize', partySize.toString())
       .set('sector', sector);
 
-    return this.http.get<{ title: string; available: boolean }[]>(
+    return this.http.get<AvailableHourDTO[]>(
       `${environment.serverApi}/reservations/available-tables`,
       { params }
     );

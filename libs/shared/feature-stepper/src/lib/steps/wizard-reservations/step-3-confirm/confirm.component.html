@@ -1,5 +1,5 @@
-<div class="flex pt-10 flex-auto flex-col">
-  <div class="pt-0 p-8 flex flex-col w-full overflow-y-auto h-[53vh]">
+<div class="flex flex-auto flex-col">
+  <div class="pt-0 p-8 flex flex-col w-full overflow-y-auto gap-8">
     <div class="flex w-full items-center flex-col gap-4">
       <div class="text-6xl font-bold">Welcome to Kafè!</div>
       <span>Your reservation has been made successfully</span>
@@ -11,26 +11,29 @@
     >
       <div class="text-xl font-bold">{{ clientInfo.sector }}</div>
 
-      <div class="flex w-full">
+      <div class="flex items-center">
         Table for {{ clientInfo.partySize }} on {{ clientInfo.date }} at
         {{ clientInfo.hour }}
       </div>
 
-      <div class="flex w-full items-center flex-col gap-4">
-        <div class="flex">
+      <div class="flex items-center flex-col gap-2">
+        <div class="flex gap-2">
           <div>Name:</div>
           <div>{{ clientInfo.name }}</div>
         </div>
 
-        <div class="flex">
+        <div class="flex gap-2">
           <div>Confirmation #:</div>
-          <div>{{ clientInfo.name }}</div>
+          <div>{{ clientInfo.id }}</div>
         </div>
       </div>
 
-      <div class="flex w-full items-center">
+      <div class="flex items-center">
         1234 N. Main St. Lower East Side Manhattan, NY
       </div>
     </div>
   </div>
+</div>
+<div class="flex items-center mt-2 gap-2 p-5">
+  <button mat-raised-button color="primary">Cancel reservation</button>
 </div>

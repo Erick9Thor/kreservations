@@ -44,7 +44,12 @@
       Para reservar, selecciona la fecha y hora deseada, proporciona tu
       información de contacto.
     </div>
-    <button class="flex-auto w-64" mat-flat-button color="primary">
+    <button
+      class="flex-auto w-64"
+      mat-flat-button
+      color="primary"
+      [routerLink]="['/reservations']"
+    >
       Reservar ahora
     </button>
   </div>

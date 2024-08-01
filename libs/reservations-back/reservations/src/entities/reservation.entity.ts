@@ -11,7 +11,7 @@ export class Reservation {
   id: number;
 
   @Column()
-  date: string;
+  date: number;
 
   @Column()
   hour: string;

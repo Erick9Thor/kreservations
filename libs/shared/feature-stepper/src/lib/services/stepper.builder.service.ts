@@ -27,7 +27,7 @@ export class StepperUserBuilderService {
           title: 'Review reservation',
         },
         {
-          id: 'confirm',
+          id: 'confirm-reservation',
           isActive: false,
           isPast: false,
           title: 'Confirm reservation',
@@ -39,7 +39,7 @@ export class StepperUserBuilderService {
   stepsList = new Map<string, Type<any>>([
     ['config-reservation', ConfigReservationComponent],
     ['review-reservation', ReviewReservationComponent],
-    ['confirme', ConfirmComponent],
+    ['confirm-reservation', ConfirmComponent],
   ]);
 
   getWizardSteps(id: string): WizardStepperItem[] | undefined {
