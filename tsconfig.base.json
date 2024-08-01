@@ -26,6 +26,9 @@
       ],
       "@kreservations/directives": ["libs/shared/directives/src/index.ts"],
       "@kreservations/environment": ["libs/core/environment/src/index.ts"],
+      "@kreservations/feature-notifications": [
+        "libs/core/feature-notifications/src/index.ts"
+      ],
       "@kreservations/feature-stepper": [
         "libs/shared/feature-stepper/src/index.ts"
       ],

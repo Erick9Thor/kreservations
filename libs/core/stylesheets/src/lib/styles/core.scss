@@ -20,7 +20,7 @@
 @import "../partials/plugins/@angular/material/index";
 
 // Components
-// @import "../components/snackbar";
+@import "../components/snackbar";
 
 :root {
     @include mat.all-component-themes($knowify-theme-light);

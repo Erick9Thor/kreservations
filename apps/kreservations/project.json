@@ -53,6 +53,13 @@
               "maximumError": "4kb"
             }
           ],
+          "index": "apps/admin-web/src/index.html",
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
           "outputHashing": "all"
         },
         "development": {
@@ -62,9 +69,12 @@
               "with": "libs/core/environment/src/lib/kreservations-back/environment.prod.ts"
             }
           ],
+          "buildOptimizer": false,
           "optimization": false,
+          "vendorChunk": true,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"

@@ -9,9 +9,9 @@
   <!-- SECTION: TITLE -->
 
   <div class="flex w-full items-center flex-col gap-4">
-    <div class="text-6xl font-bold">¡Bienvenido a Kafè!</div>
+    <div class="text-6xl font-bold">Welcome to Kafè!</div>
     <span
-      >Rserva tu mesa en nuestro aclamado restaurante en el Lower East Side de
+      >Reserve your table at our acclaimed restaurant in the Lower East Side of
       Manhattan</span
     >
   </div>
@@ -19,11 +19,11 @@
   <!-- SECTION: ABOUT US -->
 
   <div class="flex w-full flex-col gap-4">
-    <div class="text-3xl font-bold">Sobre Nosotros</div>
+    <div class="text-3xl font-bold">About Us</div>
     <div>
-      Kafe es reconocido por su ambiente acogedor y su deliciosa cocina. Dese su
-      apertura, ha sido un lugar popular tanto para los locales como para los
-      visitantes. Ven y disfruta de una experiencia gastroómica única
+      Kafe is renowned for its cozy atmosphere and delicious cuisine. Since its
+      opening, it has been a popular spot for both locals and visitors. Come and
+      enjoy a unique gastronomic experience.
     </div>
 
     <!-- IMAGES -->
@@ -35,14 +35,14 @@
     </div>
   </div>
 
-  <!-- SECTION: RSERVATIONS -->
+  <!-- SECTION: RESERVATIONS -->
 
   <div class="flex w-full flex-col gap-4">
     <div class="text-3xl font-bold">Reservations</div>
-    <div>Horario de reservas: 6pm a 10pm en intervalos de media hora.</div>
+    <div>Reservation hours: 6pm to 10pm in half-hour intervals.</div>
     <div>
-      Para reservar, selecciona la fecha y hora deseada, proporciona tu
-      información de contacto.
+      To reserve, select the desired date and time, and provide your contact
+      information.
     </div>
     <button
       class="flex-auto w-64"
@@ -50,14 +50,14 @@
       color="primary"
       [routerLink]="['/reservations']"
     >
-      Reservar ahora
+      Reserve Now
     </button>
   </div>
 
-  <!-- SECTION: TESTIMONIOS -->
+  <!-- SECTION: TESTIMONIALS -->
 
   <div class="flex w-full flex-col gap-4">
-    <div class="text-3xl font-bold">Testimonios</div>
+    <div class="text-3xl font-bold">Testimonials</div>
     <div class="grid grid-flow-row-dense grid-cols-3 gap-4">
       @for (item of testimonies; track $index) {
       <mat-card class="flex flex-col">
@@ -77,7 +77,7 @@
   <!-- SECTION: CONTACT -->
 
   <div class="flex w-full flex-col gap-4">
-    <div class="text-3xl font-bold">Información de Contacto</div>
-    <div class="w-full">Teléfono: (123) 456-7890</div>
+    <div class="text-3xl font-bold">Contact Information</div>
+    <div class="w-full">Phone: (123) 456-7890</div>
   </div>
 </div>

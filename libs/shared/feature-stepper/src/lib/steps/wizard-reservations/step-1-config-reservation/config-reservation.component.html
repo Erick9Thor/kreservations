@@ -12,49 +12,49 @@
 
         <div class="grid grid-cols-2 gap-8">
           <mat-form-field>
-            <mat-label>Nombre:</mat-label>
+            <mat-label>Name:</mat-label>
             <input matInput formControlName="name" />
             <mat-error
               *ngIf="this.reservationForm.get('name').hasError('required')"
             >
-              Este campo es obligatorio
+              This field is required
             </mat-error>
             <mat-error
               *ngIf="this.reservationForm.get('name').hasError('maxlength')"
             >
-              El nombre no puede tener más de 50 caracteres
+              The name cannot be more than 50 characters
             </mat-error>
             <mat-error
               *ngIf="this.reservationForm.get('name').hasError('minlength')"
             >
-              El nombre debe tener al menos 5 caracteres
+              The name must be at least 2 characters long
             </mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label> Email: </mat-label>
+            <mat-label>Email:</mat-label>
             <input matInput formControlName="email" />
             <mat-error
               *ngIf="this.reservationForm.get('email').hasError('required')"
             >
-              Este campo es obligatorio
+              This field is required
             </mat-error>
             <mat-error
               *ngIf="this.reservationForm.get('email').hasError('email')"
             >
-              El formato no es correcto
+              The format is incorrect
             </mat-error>
           </mat-form-field>
         </div>
 
         <div class="grid grid-cols-2 gap-8">
           <mat-form-field>
-            <mat-label>Teléfono</mat-label>
+            <mat-label>Phone:</mat-label>
             <input matInput formControlName="phone" />
             <mat-error
               *ngIf="this.reservationForm.get('phone').hasError('required')"
             >
-              Este campo es obligatorio
+              This field is required
             </mat-error>
           </mat-form-field>
         </div>
@@ -110,7 +110,7 @@
 
         <div class="grid grid-cols-2 gap-8">
           <mat-form-field>
-            <mat-label>Tamaño del grupo:</mat-label>
+            <mat-label>Group Size:</mat-label>
             <input
               matInput
               formControlName="partySize"
@@ -121,17 +121,17 @@
             <mat-error
               *ngIf="this.reservationForm.get('partySize').hasError('required')"
             >
-              Este campo es obligatorio
+              This field is required
             </mat-error>
             <mat-error
               *ngIf="this.reservationForm.get('partySize').hasError('max')"
             >
-              El tamaño del grupo no puede ser superior a 12
+              The group size cannot be more than 12
             </mat-error>
             <mat-error
               *ngIf="this.reservationForm.get('partySize').hasError('min')"
             >
-              El tamaño del grupo no puede ser inferior a 1
+              The group size cannot be less than 1
             </mat-error>
           </mat-form-field>
 
@@ -161,10 +161,10 @@
 
         <div class="grid grid-cols-2 gap-8">
           <mat-form-field>
-            <mat-label>Number of childrens</mat-label>
+            <mat-label>Number of children:</mat-label>
             <input matInput formControlName="childrens" />
             <mat-error
-              *ngIf="this.reservationForm.get('sector').hasError('required')"
+              *ngIf="this.reservationForm.get('childrens').hasError('required')"
             >
             </mat-error>
           </mat-form-field>
@@ -172,10 +172,10 @@
 
         <div class="grid grid-rows-2 gap-2">
           <mat-checkbox formControlName="smokers"
-            >Any party member would like to smoke during dinner?</mat-checkbox
+            >Does anyone in the party want to smoke during dinner?</mat-checkbox
           >
           <mat-checkbox formControlName="birthdays"
-            >Anyone in the party is celebrating a birthday?</mat-checkbox
+            >Is anyone in the party celebrating a birthday?</mat-checkbox
           >
         </div>
 
@@ -199,7 +199,7 @@
 
         <div class="grid grid-cols-2 gap-8">
           <mat-form-field>
-            <mat-label> Fecha y hora de la reserva </mat-label>
+            <mat-label>Reservation Date and Time</mat-label>
             <mtx-datetimepicker #datetimePicker [type]="'date'">
               <mtx-datetimepicker-actions>
                 <button mat-button mtxDatetimepickerClear>Clear</button>
@@ -214,6 +214,7 @@
               [min]="minDate"
               [max]="maxDate"
               formControlName="date"
+              [value]="this.reservationForm.get('date').value"
             />
             <mtx-datetimepicker-toggle
               [for]="datetimePicker"

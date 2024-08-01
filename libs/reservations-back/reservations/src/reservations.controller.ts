@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, Query, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Query,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { Observable } from 'rxjs';
 import { ReservationService, SectorType } from './reservations.service';
@@ -31,5 +39,10 @@ export class ReservationController {
   @Get(':id')
   findOne(@Param('id') id: number): Observable<Reservation> {
     return this.reservationService.getReservationById(id);
+  }
+
+  @Delete(':id')
+  cancel(@Param('id') id: number): Observable<{ success: boolean }> {
+    return this.reservationService.cancelReservation(id);
   }
 }

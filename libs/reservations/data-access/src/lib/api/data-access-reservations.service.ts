@@ -34,8 +34,14 @@ export class ReservationService {
     );
   }
 
-  getReservationById(id: string): Observable<UserReservation> {
+  getReservationById(id: number): Observable<UserReservation> {
     return this.http.get<UserReservation>(
+      `${environment.serverApi}/reservations/${id}`
+    );
+  }
+
+  cancelReservationById(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(
       `${environment.serverApi}/reservations/${id}`
     );
   }

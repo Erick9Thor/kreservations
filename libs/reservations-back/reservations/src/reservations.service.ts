@@ -165,4 +165,19 @@ export class ReservationService {
       })
     );
   }
+
+  cancelReservation(id: number) {
+    return from(this.reservationRepository.delete({ id })).pipe(
+      map((reservation) => {
+        if (!reservation) {
+          throw new Error(`Reservation with id ${id} not found`);
+        }
+        return { success: true };
+      }),
+      catchError((error) => {
+        console.error('Error finding reservation:', error);
+        return throwError(() => new Error('Failed to find reservation'));
+      })
+    );
+  }
 }

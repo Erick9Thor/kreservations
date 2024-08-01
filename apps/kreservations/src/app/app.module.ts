@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { routerReducer } from '@ngrx/router-store';
 
 import * as fromStepper from '@kreservations/feature-stepper';
+import { FeatureNotificationsModule } from '@kreservations/feature-notifications';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import * as fromStepper from '@kreservations/feature-stepper';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FeatureNotificationsModule,
 
     // STORE
 
