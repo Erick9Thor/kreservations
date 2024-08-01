@@ -1,4 +1,4 @@
-export interface StepperUserRservation {
+export interface UserReservation {
   name: string;
   email: string;
   phone: string;

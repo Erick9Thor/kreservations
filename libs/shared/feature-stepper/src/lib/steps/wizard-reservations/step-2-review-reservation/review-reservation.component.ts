@@ -1,7 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReservationService } from '@kreservations/data-access';
-import { BaseComponent, StepperUserRservation } from '@kreservations/models';
+import {
+  BaseComponent,
+  UserReservation,
+  WizardStepperItem,
+} from '@kreservations/models';
 import { BehaviorSubject, take, takeUntil } from 'rxjs';
 import { StepperFacade } from '../../../store/stepper.facade';
 
@@ -10,12 +14,26 @@ import { StepperFacade } from '../../../store/stepper.facade';
   templateUrl: './review-reservation.component.html',
   styleUrl: './review-reservation.component.scss',
 })
-export class ReviewReservationComponent extends BaseComponent {
+export class ReviewReservationComponent
+  extends BaseComponent
+  implements OnInit
+{
   @Output() nextStep = new EventEmitter();
   @Output() previousStep = new EventEmitter();
 
-  userInfoReservation$: BehaviorSubject<StepperUserRservation> =
-    new BehaviorSubject<StepperUserRservation>(null);
+  @Input()
+  set data(value: WizardStepperItem) {
+    this._data = value;
+  }
+
+  get data(): WizardStepperItem {
+    return this._data;
+  }
+
+  _data: WizardStepperItem;
+
+  userInfoReservation$: BehaviorSubject<UserReservation> =
+    new BehaviorSubject<UserReservation>(null);
 
   loggingSended = false;
 
@@ -49,7 +67,9 @@ export class ReviewReservationComponent extends BaseComponent {
       .createRservation(this.userInfoReservation$.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: () => {
+        next: (id: string) => {
+          this.stepperFacade.setStepData(this.data.id, id);
+
           this.nextStep.emit();
         },
         error: () => {

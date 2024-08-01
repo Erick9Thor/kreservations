@@ -1,7 +1,10 @@
 <div
   class="w-full h-[66px] px-gutter flex items-center border-b-[1px] border-black-500 justify-between"
 >
-  <div class="flex gap-4 items-center">
+  <div
+    class="flex gap-4 items-center hover:cursor-pointer"
+    [routerLink]="['/']"
+  >
     <!-- SVG ICON -->
 
     <svg
@@ -24,7 +27,7 @@
   </div>
 
   <div class="flex items-center gap-4">
-    <div>Inicio</div>
+    <div [routerLink]="['/']">Inicio</div>
     <div>Menú</div>
     <div>Sobre Nosotros</div>
     <div>Contacto</div>

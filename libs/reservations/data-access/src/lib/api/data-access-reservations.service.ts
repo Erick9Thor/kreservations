@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@kreservations/environment';
-import { StepperUserRservation } from '@kreservations/models';
+import { UserReservation } from '@kreservations/models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -26,7 +26,16 @@ export class ReservationService {
     );
   }
 
-  createRservation(details: StepperUserRservation): Observable<object> {
-    return this.http.post(`${environment.serverApi}/reservations`, details);
+  createRservation(details: UserReservation): Observable<string> {
+    return this.http.post<string>(
+      `${environment.serverApi}/reservations`,
+      details
+    );
+  }
+
+  getReservationById(id: string): Observable<UserReservation> {
+    return this.http.get<UserReservation>(
+      `${environment.serverApi}/reservations/${id}`
+    );
   }
 }
