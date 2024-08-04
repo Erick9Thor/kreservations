@@ -1,8 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@kreservations/environment';
-import { UserReservation } from '@kreservations/models';
-import { AvailableHourDTO } from '@kreservations/reservations-back/reservations';
+import { AvailableHour, UserReservation } from '@kreservations/models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,13 +14,13 @@ export class ReservationService {
     date: number,
     partySize: number,
     sector: string
-  ): Observable<AvailableHourDTO[]> {
+  ): Observable<AvailableHour[]> {
     const params = new HttpParams()
       .set('date', date)
       .set('partySize', partySize.toString())
       .set('sector', sector);
 
-    return this.http.get<AvailableHourDTO[]>(
+    return this.http.get<AvailableHour[]>(
       `${environment.serverApi}/reservations/available-tables`,
       { params }
     );

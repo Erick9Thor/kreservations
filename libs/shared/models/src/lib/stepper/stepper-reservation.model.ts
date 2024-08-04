@@ -14,3 +14,11 @@ export interface UserReservation {
   date: string;
   hour: string;
 }
+
+export class AvailableHour {
+  id: number;
+  sector: string;
+  seatingCapacity: number;
+  available: boolean;
+  title: string;
+}

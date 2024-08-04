@@ -53,7 +53,7 @@
               "maximumError": "4kb"
             }
           ],
-          "index": "apps/admin-web/src/index.html",
+          "index": "apps/kreservations/src/index.html",
           "optimization": true,
           "sourceMap": false,
           "namedChunks": false,

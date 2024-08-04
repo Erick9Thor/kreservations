@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StepperUserBuilderService } from '../services/stepper.builder.service';
 import * as fromStepperSelector from '../store/stepper.selectors';

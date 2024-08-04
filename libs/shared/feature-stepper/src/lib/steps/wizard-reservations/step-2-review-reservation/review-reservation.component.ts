@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { ReservationService } from '@kreservations/data-access';
 import {
   BaseComponent,

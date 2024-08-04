@@ -10,16 +10,13 @@ import {
 } from '@angular/forms';
 import { ReservationService } from '@kreservations/data-access';
 import {
+  AvailableHour,
   BaseComponent,
   UserReservation,
   WizardStepperItem,
 } from '@kreservations/models';
 import { merge, take, takeUntil } from 'rxjs';
 import { StepperFacade } from '../../../store/stepper.facade';
-import {
-  AvailableHourDTO,
-  CreateReservationDto,
-} from '@kreservations/reservations-back/reservations';
 
 @Component({
   selector: 'lib-config-reservation',
@@ -71,7 +68,7 @@ export class ConfigReservationComponent
   minDate = new Date('2024-07-24'); // YYYY-MM-DDTHH:mm:ss.sssZ
   maxDate = new Date('2024-07-31');
 
-  availableHours: AvailableHourDTO[];
+  availableHours: AvailableHour[];
 
   selectedHourIndex = null;
   previuousData: UserReservation = null;
@@ -261,7 +258,7 @@ export class ConfigReservationComponent
    * @param hour - The selected hour.
    * @param index - The index of the selected hour.
    */
-  selectHour(hour: AvailableHourDTO, index: number): void {
+  selectHour(hour: AvailableHour, index: number): void {
     this.selectedHourIndex = index;
     if (hour && hour.available) {
       this.reservationForm.get('hour').setValue(hour.title);
@@ -272,7 +269,7 @@ export class ConfigReservationComponent
    * Saves the current reservation data and emits the next step event.
    */
   saveData(): void {
-    const reservation: CreateReservationDto = {
+    const reservation: UserReservation = {
       ...this.reservationForm.value,
       date: new Date(this.reservationForm.value.date).getTime(),
     };
